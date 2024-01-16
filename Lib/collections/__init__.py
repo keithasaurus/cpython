@@ -804,9 +804,6 @@ class Counter(dict):
             if v > other[k]:
                 return False
 
-        for k, v in other.items():
-            if v and k not in self:
-                return False
         return True
 
     def __lt__(self, other):
