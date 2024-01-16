@@ -800,7 +800,14 @@ class Counter(dict):
         'True if all counts in self are a subset of those in other.'
         if not isinstance(other, Counter):
             return NotImplemented
-        return all(self[e] <= other[e] for c in (self, other) for e in c)
+        for k, v in self.items():
+            if v > other[k]:
+                return False
+
+        for k, v in other.items():
+            if v and k not in self:
+                return False
+        return True
 
     def __lt__(self, other):
         'True if all counts in self are a proper subset of those in other.'
